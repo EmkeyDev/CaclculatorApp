@@ -2,31 +2,39 @@ import tkinter as tk
 import customtkinter as ctk
 from CTkListbox import CTkListbox
 from calculator import calculate, calculate_scientific
-from history import save_history, load_history
+from history import save_history, load_history, clear_history
 
 class CalculatorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Calculator")
         self.root.geometry("500x600")
+        self.root.configure(fg_color="#1a1a1a")
         self.root.resizable(True, True)
+        self.root.iconbitmap("icon.ico")
 
         # режим переключения
         self.mode = "standard"
 
         # кнопки режима
-        mode_frame = ctk.CTkFrame(root, fg_color="transparent")
-        mode_frame.grid(row=0, column=0, columnspan=4, pady=5)
+        mode_frame = ctk.CTkFrame(root, fg_color="#1a1a1a", corner_radius=10)
+        mode_frame.grid(row=0, column=0, columnspan=4, pady=10, padx=10)
 
         ctk.CTkButton(
-            mode_frame, text="Standard", width=100,
+            mode_frame, text="Standard", width=120, height=32,
+            fg_color="#1a3a5c", hover_color="#2a4f7a",
+            text_color="#e0e0e0", corner_radius=8,
+            font=("Arial", 13),
             command=lambda: self.switch_mode("standard")
-        ).pack(side="left", padx=5)
+        ).pack(side="left", padx=6, pady=6)
 
         ctk.CTkButton(
-            mode_frame, text="Scientific", width=100,
+            mode_frame, text="Scientific", width=120, height=32,
+            fg_color="#1a3a5c", hover_color="#2a4f7a",
+            text_color="#e0e0e0", corner_radius=8,
+            font=("Arial", 13),
             command=lambda: self.switch_mode("scientific")
-        ).pack(side="left", padx=5)
+        ).pack(side="left", padx=6, pady=6)
 
         # поле ввода
         self.entry = ctk.CTkEntry(
@@ -45,13 +53,23 @@ class CalculatorApp:
         self.bottom_frame.grid(row=3, column=0, columnspan=4, pady=5)
 
         ctk.CTkButton(
-            self.bottom_frame, text="History", width=220,
+            self.bottom_frame, text="🕐 History", width=140,
+            fg_color="#37474F", hover_color="#455A64",
+            font=("Arial", 13),
             command=self.show_history
         ).pack(side="left", padx=4)
 
         ctk.CTkButton(
-            self.bottom_frame, text="Clear", width=220,
-            fg_color="#D32F2F", hover_color="#E53935",
+            self.bottom_frame, text="🗑 Clear History", width=140,
+            fg_color="#E65100", hover_color="#EF6C00",
+            font=("Arial", 13),
+            command=self.clear_history
+        ).pack(side="left", padx=4)
+
+        ctk.CTkButton(
+            self.bottom_frame, text="⌫ Clear", width=140,
+            fg_color="#C62828", hover_color="#D32F2F",
+            font=("Arial", 13),
             command=self.clear
         ).pack(side="left", padx=4)
 
@@ -123,7 +141,7 @@ class CalculatorApp:
                 self.buttons_frame,
                 text=label, width=110, height=45,
                 corner_radius=8,
-                fg_color="#1E5080", hover_color="#2A6FA8",
+                fg_color="#1a3a5c", hover_color="#2a4f7a",
                 font=("Arial", 14),
                 command=lambda o=op: self.sci_click(o)
             ).grid(row=i // 4, column=i % 4, padx=4, pady=4)
@@ -242,6 +260,10 @@ class CalculatorApp:
         if selected:
             self.entry.delete(0, tk.END)
             self.entry.insert(0, selected.split('=')[0].strip())
+
+    def clear_history(self):
+        clear_history()
+        self.history_box.delete(0, "end")
 
 
 if __name__ == "__main__":

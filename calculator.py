@@ -21,19 +21,16 @@ def calculate_scientific(operation, value):
             return value ** 2
         elif operation == "x3":
             return value ** 3
-        # новые
         elif operation == "xy":
             return f"{value}**"
         elif operation == "1/x":
             return 1 / value
-        elif operation == "e":
-            return math.e
     except Exception as e:
         return f"Error: {e}"
 
 def calculate(expression):
     try:
-        allowed = "0123456789+-*/(). eπ"
+        allowed = "0123456789+-**/()). eπ"
         for char in expression:
             if char not in allowed:
                 return "Error: invalid symbol"

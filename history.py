@@ -32,6 +32,7 @@ class HistoryManager:
         self.history = []
         self.save()
 
+
     def get_all(self):
         return self.history
 
@@ -42,3 +43,6 @@ def save_history(expression, result):
 
 def load_history():
     return _manager.get_all()
+
+def clear_history():
+     _manager.clear()
