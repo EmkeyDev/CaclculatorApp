@@ -16,9 +16,9 @@ Last version:
 
 ## 👥 Group Members
 
-- Name 1
-- Name 2
-- Name 3
+- Muratbekov Emirbek
+- Nurgazyev Abbas
+- Akhmatkulov Islam
 
 ---
 
@@ -60,8 +60,3 @@ This project solves all three problems in one application.
 | JSON          | History file storage      |
 | math          | Scientific calculations   |
 
----
-
-## 🚀 How to Run
-
-1. Clone the repository:
